@@ -103,3 +103,21 @@ predicted_aqi = model_pipeline.predict(new_data_features)
 
 print(f"\nPredicted AQI in India: {predicted_aqi[0]:.2f}")
 print(f"Predicted AQI in United States of America: {predicted_aqi[1]:.2f}")
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='Actual AQI', y='Predicted AQI', data=results_df, color='blue', label='Predictions')
+plt.plot([results_df['Actual AQI'].min(), results_df['Actual AQI'].max()],
+         [results_df['Actual AQI'].min(), results_df['Actual AQI'].max()],
+         color='red', linestyle='--', label='Perfect Prediction')
+
+plt.title('Actual vs Predicted AQI')
+plt.xlabel('Actual AQI')
+plt.ylabel('Predicted AQI')
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+print("The Accuracy of the model is: ",{r2})
